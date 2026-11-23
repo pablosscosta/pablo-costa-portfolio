@@ -15,19 +15,32 @@ function Contact() {
           desenvolvimento de software.
         </p>
 
-        <a className="contact-email" href="mailto:seuemail@exemplo.com">
+        <a
+          className="contact-email"
+          href="mailto:pablosousa013@gmail.com"
+        >
           <Mail size={20} />
-          seuemail@exemplo.com
+          pablosousa013@gmail.com
           <ArrowUpRight size={18} />
         </a>
 
         <div className="contact-socials">
-          <a href="#" target="_blank" rel="noreferrer" aria-label="GitHub">
+          <a
+            href="https://github.com/pablosscosta"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
             <FaGithub size={20} />
             GitHub
           </a>
 
-          <a href="#" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/in/pablosilva013/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
             <FaLinkedinIn size={20} />
             LinkedIn
           </a>
