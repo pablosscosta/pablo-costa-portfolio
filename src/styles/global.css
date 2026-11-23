@@ -1,3 +1,4 @@
+
 :root {
   /* Colors */
   --color-background: #101114;
@@ -10,8 +11,8 @@
   --color-accent: #9b8afb;
 
   /* Typography */
-  --font-primary: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-primary: "Manrope", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
 
   /* Layout */
   --container-width: 1120px;
@@ -26,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
 
 body {
@@ -61,4 +63,12 @@ button {
 ::selection {
   background-color: var(--color-accent);
   color: var(--color-background);
+}
+
+.section-container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding-right: var(--page-padding);
+  padding-left: var(--page-padding);
 }
