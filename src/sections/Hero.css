@@ -83,11 +83,11 @@
   background-color: var(--color-surface);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .hero {
-    min-height: 100svh;
-    padding-top: 120px;
-    padding-bottom: 64px;
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 40px;
   }
 
   .hero h1 {

@@ -1,10 +1,40 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import './Header.css'
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+
+  useEffect(() => {
+    const sections = document.querySelectorAll(
+      '#about, #technologies, #projects, #contact'
+    )
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleSections = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              a.boundingClientRect.top - b.boundingClientRect.top
+          )
+
+        if (visibleSections.length > 0) {
+          setActiveSection(visibleSections[0].target.id)
+        }
+      },
+      {
+        rootMargin: '-100px 0px -70% 0px',
+        threshold: 0,
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
 
   function closeMenu() {
     setIsMenuOpen(false)
@@ -30,12 +60,32 @@ function Header() {
           className={`header-nav ${isMenuOpen ? 'is-open' : ''}`}
           aria-label="Navegação principal"
         >
-          <a href="#about" onClick={closeMenu}>Sobre</a>
-          <a href="#technologies" onClick={closeMenu}>Tecnologias</a>
-          <a href="#projects" onClick={closeMenu}>Projetos</a>
+          <a
+            href="#about"
+            className={activeSection === 'about' ? 'active' : ''}
+            onClick={closeMenu}
+          >
+            Sobre
+          </a>
 
           <a
-            className="mobile-contact"
+            href="#technologies"
+            className={activeSection === 'technologies' ? 'active' : ''}
+            onClick={closeMenu}
+          >
+            Tecnologias
+          </a>
+
+          <a
+            href="#projects"
+            className={activeSection === 'projects' ? 'active' : ''}
+            onClick={closeMenu}
+          >
+            Projetos
+          </a>
+
+          <a
+            className={`mobile-contact ${activeSection === 'contact' ? 'active' : ''}`}
             href="#contact"
             onClick={closeMenu}
           >
@@ -43,7 +93,10 @@ function Header() {
           </a>
         </nav>
 
-        <a className="header-contact" href="#contact">
+        <a
+          className={`header-contact ${activeSection === 'contact' ? 'active' : ''}`}
+          href="#contact"
+        >
           Contato
         </a>
 
