@@ -21,7 +21,7 @@ const projects = [
     github: 'https://github.com/pablosscosta/jukebox-hub',
     demo: 'https://jukebox-hub-web.onrender.com',
     demoNote:
-      'Hospedado no plano gratuito do Render: o primeiro acesso pode levar até 1 minuto.',
+      'Hospedado no plano gratuito do Render: o primeiro acesso pode levar até 1 minuto. Criar uma party exige uma conta do Spotify liberada na demo; convidados entram pelo link, sem conta.',
   },
 ]
 
