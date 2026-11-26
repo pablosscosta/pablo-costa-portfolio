@@ -1,10 +1,12 @@
 
+import { FlaskConical } from 'lucide-react'
 import {
   SiRuby,
   SiRubyonrails,
   SiPython,
   SiDjango,
   SiJavascript,
+  SiTypescript,
   SiReact,
   SiHtml5,
   SiCss,
@@ -12,6 +14,8 @@ import {
   SiMysql,
   SiGit,
   SiDocker,
+  SiVitest,
+  SiGithubactions,
 } from 'react-icons/si'
 
 import './Technologies.css'
@@ -30,6 +34,7 @@ const technologyGroups = [
     name: 'Frontend',
     technologies: [
       { name: 'JavaScript', icon: SiJavascript },
+      { name: 'TypeScript', icon: SiTypescript },
       { name: 'React', icon: SiReact },
       { name: 'HTML5', icon: SiHtml5 },
       { name: 'CSS3', icon: SiCss },
@@ -47,6 +52,14 @@ const technologyGroups = [
     technologies: [
       { name: 'Git', icon: SiGit },
       { name: 'Docker', icon: SiDocker },
+    ],
+  },
+  {
+    name: 'Qualidade',
+    technologies: [
+      { name: 'RSpec', icon: FlaskConical },
+      { name: 'Vitest', icon: SiVitest },
+      { name: 'GitHub Actions', icon: SiGithubactions },
     ],
   },
 ]
