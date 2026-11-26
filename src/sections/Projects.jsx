@@ -3,11 +3,40 @@ import { FaGithub } from 'react-icons/fa'
 import projects from '../data/projects'
 import './Projects.css'
 
-function ProjectImage({ image, className }) {
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+function ProjectVideo({ video, className }) {
+  const autoPlay = !prefersReducedMotion()
+
+  return (
+    <figure className={`${className} project-video`}>
+      <video
+        src={video.src}
+        poster={video.poster}
+        autoPlay={autoPlay}
+        controls={!autoPlay}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={video.caption}
+      />
+      <figcaption>{video.caption}</figcaption>
+    </figure>
+  )
+}
+
+function ProjectMedia({ project, className }) {
+  if (project.video) {
+    return <ProjectVideo video={project.video} className={className} />
+  }
+
   return (
     <div className={className}>
-      {image ? (
-        <img src={image.src} alt={image.alt} loading="lazy" />
+      {project.image ? (
+        <img src={project.image.src} alt={project.image.alt} loading="lazy" />
       ) : (
         <span>Imagem do projeto</span>
       )}
@@ -66,7 +95,7 @@ function ProjectLinks({ github, demo }) {
 function FeaturedProject({ project }) {
   return (
     <article className="project-featured">
-      <ProjectImage image={project.image} className="project-image" />
+      <ProjectMedia project={project} className="project-image" />
 
       <div className="project-info">
         <span className="project-category">{project.category}</span>
@@ -86,7 +115,7 @@ function FeaturedProject({ project }) {
 function ProjectCard({ project }) {
   return (
     <article className="project-card">
-      <ProjectImage image={project.image} className="project-card-image" />
+      <ProjectMedia project={project} className="project-card-image" />
 
       <div className="project-card-content">
         <span className="project-category">{project.category}</span>
