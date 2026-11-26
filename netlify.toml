@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  # Skip the build (exit 0) when nothing that affects the site changed,
+  # so docs-only merges don't spend Netlify credits.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- src public index.html package.json package-lock.json vite.config.js netlify.toml"
 
 [build.environment]
   NODE_VERSION = "24"
