@@ -26,33 +26,93 @@
   line-height: 1.8;
 }
 
-.contact-email {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+.contact-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
   margin-top: 32px;
-  padding: 15px 18px;
+}
+
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
   border: 1px solid var(--color-border);
   border-radius: 6px;
   background-color: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
   font-size: 0.95rem;
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
-.contact-email svg:first-child {
-  color: var(--color-accent);
+.contact-form textarea {
+  resize: vertical;
 }
 
-.contact-email svg:last-child {
-  margin-left: 12px;
-  color: var(--color-text-secondary);
-}
-
-.contact-email:hover {
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
   border-color: var(--color-accent);
+  outline: none;
+}
+
+.contact-form-full,
+.contact-form-footer {
+  grid-column: 1 / -1;
+}
+
+.contact-form-honeypot {
+  display: none;
+}
+
+.contact-form-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-form button {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid var(--color-accent);
+  border-radius: 6px;
+  background-color: var(--color-accent);
+  color: var(--color-background);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-form button:hover:not(:disabled) {
+  background-color: #ad9eff;
+}
+
+.contact-form button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.contact-form-status {
+  font-size: 0.9rem;
+}
+
+.contact-form-status--success {
   color: var(--color-accent);
+}
+
+.contact-form-status--error {
+  color: #f87171;
 }
 
 .contact-socials {
@@ -86,14 +146,11 @@
 }
 
 @media (max-width: 480px) {
-  .contact-email {
-    width: 100%;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 0.85rem;
+  .contact-form {
+    grid-template-columns: 1fr;
   }
 
-  .contact-email svg:last-child {
-    margin-left: 0;
+  .contact-form button {
+    width: 100%;
   }
 }

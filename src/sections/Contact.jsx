@@ -1,5 +1,6 @@
-import { Mail, ArrowUpRight } from 'lucide-react'
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
+import profile from '../data/profile'
+import ContactForm from './ContactForm.jsx'
 import './Contact.css'
 
 function Contact() {
@@ -15,18 +16,11 @@ function Contact() {
           desenvolvimento de software.
         </p>
 
-        <a
-          className="contact-email"
-          href="mailto:pablosousa013@gmail.com"
-        >
-          <Mail size={20} />
-          pablosousa013@gmail.com
-          <ArrowUpRight size={18} />
-        </a>
+        <ContactForm />
 
         <div className="contact-socials">
           <a
-            href="https://github.com/pablosscosta"
+            href={profile.githubUrl}
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
@@ -36,7 +30,7 @@ function Contact() {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/pablosilva013/"
+            href={profile.linkedinUrl}
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
