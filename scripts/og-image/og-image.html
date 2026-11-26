@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&family=IBM+Plex+Mono:wght@500&display=block"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 1200px;
+        height: 630px;
+        padding: 72px 80px;
+        background:
+          radial-gradient(circle at 85% 15%, rgba(155, 138, 251, 0.18), transparent 45%),
+          #101114;
+        color: #f1f1f2;
+        font-family: 'Manrope', sans-serif;
+      }
+
+      .brand {
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .brand span {
+        color: #9b8afb;
+      }
+
+      .eyebrow {
+        margin-bottom: 20px;
+        color: #9b8afb;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 24px;
+        letter-spacing: 0.12em;
+      }
+
+      h1 {
+        font-size: 76px;
+        line-height: 1.08;
+        letter-spacing: -0.05em;
+      }
+
+      h1 span {
+        color: #9b8afb;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        color: #a1a1aa;
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 21px;
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="brand"><span>&lt;/&gt;</span> Pablo Costa<span>.</span></div>
+
+    <div>
+      <p class="eyebrow">DESENVOLVEDOR BACKEND</p>
+      <h1>Desenvolvo <span>APIs e<br />sistemas web.</span></h1>
+    </div>
+
+    <div class="footer">
+      <span>Ruby on Rails · Python · React · TypeScript</span>
+      <span>portfolio-pablosscosta.netlify.app</span>
+    </div>
+  </body>
+</html>
