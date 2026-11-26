@@ -15,6 +15,20 @@ function ProjectImage({ image, className }) {
   )
 }
 
+function ProjectHighlights({ highlights }) {
+  if (!highlights?.length) {
+    return null
+  }
+
+  return (
+    <ul className="project-highlights">
+      {highlights.map((highlight) => (
+        <li key={highlight}>{highlight}</li>
+      ))}
+    </ul>
+  )
+}
+
 function ProjectTechnologies({ technologies }) {
   return (
     <div className="project-technologies">
@@ -58,6 +72,7 @@ function FeaturedProject({ project }) {
         <span className="project-category">{project.category}</span>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
+        <ProjectHighlights highlights={project.highlights} />
         <ProjectTechnologies technologies={project.technologies} />
         <ProjectLinks github={project.github} demo={project.demo} />
         {project.demoNote && (
@@ -77,6 +92,7 @@ function ProjectCard({ project }) {
         <span className="project-category">{project.category}</span>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
+        <ProjectHighlights highlights={project.highlights} />
         <ProjectTechnologies technologies={project.technologies} />
         <ProjectLinks github={project.github} demo={project.demo} />
         {project.demoNote && (

@@ -97,6 +97,33 @@
   line-height: 1.8;
 }
 
+.project-highlights {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 0;
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.project-highlights li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.project-highlights li::before {
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  content: '';
+}
+
 .project-technologies {
   display: flex;
   flex-wrap: wrap;

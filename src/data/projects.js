@@ -4,6 +4,11 @@ const projects = [
     title: 'Jukebox Hub',
     description:
       'Jukebox colaborativa integrada ao Spotify: o host toca a música no próprio dispositivo e os convidados escolhem a próxima faixa pelo celular, sem precisar de conta. Fila justa entre os convidados e atualização ao vivo em todos os celulares.',
+    highlights: [
+      'Fila justa: limite por pessoa e ninguém toca 3 músicas seguidas se outra pessoa está esperando.',
+      'Tempo real com SSE e PostgreSQL LISTEN/NOTIFY, sem Redis.',
+      'CI com lint, testes (RSpec e Vitest) e checagens de segurança em todo PR.',
+    ],
     technologies: [
       'Ruby on Rails 8.1',
       'React 19',
