@@ -4,16 +4,18 @@ function Hero() {
   return (
     <section className="hero" id="home">
       <div className="hero-content">
-        <span className="hero-eyebrow">DESENVOLVEDOR DE SISTEMAS</span>
+        <span className="hero-eyebrow">DESENVOLVEDOR BACKEND</span>
 
         <h1>
           Olá, eu sou Pablo Costa.
           <br />
-          Desenvolvo <span>soluções em software.</span>
+          Desenvolvo <span>APIs e sistemas web.</span>
         </h1>
 
         <p className="hero-description">
-          Atuo no desenvolvimento de sistemas, trabalhando na implementação de funcionalidades, manutenção de aplicações, integrações e melhoria de soluções existentes.
+          Hoje trabalho principalmente com Ruby on Rails e Python, e também
+          com React e TypeScript. Estou aberto a oportunidades com outras
+          linguagens e stacks.
         </p>
 
         <div className="hero-actions">
