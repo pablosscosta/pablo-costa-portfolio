@@ -9,7 +9,7 @@ function Header() {
 
   useEffect(() => {
     const sections = document.querySelectorAll(
-      '#about, #technologies, #projects, #contact'
+      '#projects, #about, #technologies, #contact'
     )
 
     const observer = new IntersectionObserver(
@@ -61,6 +61,14 @@ function Header() {
           aria-label="Navegação principal"
         >
           <a
+            href="#projects"
+            className={activeSection === 'projects' ? 'active' : ''}
+            onClick={closeMenu}
+          >
+            Projetos
+          </a>
+
+          <a
             href="#about"
             className={activeSection === 'about' ? 'active' : ''}
             onClick={closeMenu}
@@ -74,14 +82,6 @@ function Header() {
             onClick={closeMenu}
           >
             Tecnologias
-          </a>
-
-          <a
-            href="#projects"
-            className={activeSection === 'projects' ? 'active' : ''}
-            onClick={closeMenu}
-          >
-            Projetos
           </a>
 
           <a
