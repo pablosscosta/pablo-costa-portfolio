@@ -19,6 +19,12 @@ const projects = [
     ],
     category: 'FULL STACK',
     featured: true,
+    video: {
+      src: '/projects/jukebox-hub-demo.mp4',
+      poster: '/projects/jukebox-hub-demo.jpg',
+      caption:
+        'Demonstração simulada com dados fictícios: host no computador e convidado no celular. A música não toca de verdade.',
+    },
     image: {
       src: '/projects/jukebox-hub.png',
       alt: 'Tela do host no Jukebox Hub: música tocando com capa e progresso, busca e próximas músicas da fila',

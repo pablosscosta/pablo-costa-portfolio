@@ -66,6 +66,27 @@
   inset: 0;
 }
 
+.project-video {
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+}
+
+.project-video video {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  background-color: #000;
+}
+
+.project-video figcaption {
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
 .project-info {
   display: flex;
   flex-direction: column;
