@@ -3,37 +3,45 @@ import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import './Header.css'
 
+const ACTIVE_SECTION_OFFSET = 120
+
+// The active section is the last one whose top has passed below the header.
+// At the end of the page the last section wins, since a short final section
+// may never reach the top of the viewport.
+function findActiveSectionId(sections) {
+  const { scrollY, innerHeight } = window
+  const isAtPageEnd =
+    scrollY + innerHeight >= document.documentElement.scrollHeight - 2
+
+  if (isAtPageEnd) {
+    return sections.at(-1)?.id ?? ''
+  }
+
+  const passedSections = sections.filter(
+    (section) =>
+      section.getBoundingClientRect().top <= ACTIVE_SECTION_OFFSET
+  )
+
+  return passedSections.at(-1)?.id ?? ''
+}
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
 
   useEffect(() => {
-    const sections = document.querySelectorAll(
-      '#projects, #about, #technologies, #contact'
-    )
+    const sections = [
+      ...document.querySelectorAll('#projects, #about, #technologies, #contact'),
+    ]
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              a.boundingClientRect.top - b.boundingClientRect.top
-          )
+    function updateActiveSection() {
+      setActiveSection(findActiveSectionId(sections))
+    }
 
-        if (visibleSections.length > 0) {
-          setActiveSection(visibleSections[0].target.id)
-        }
-      },
-      {
-        rootMargin: '-100px 0px -70% 0px',
-        threshold: 0,
-      }
-    )
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
 
-    sections.forEach((section) => observer.observe(section))
-
-    return () => observer.disconnect()
+    return () => window.removeEventListener('scroll', updateActiveSection)
   }, [])
 
   function closeMenu() {
