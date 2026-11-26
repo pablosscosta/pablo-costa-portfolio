@@ -1,3 +1,5 @@
+import { FileText } from 'lucide-react'
+import profile from '../data/profile'
 import './Hero.css'
 
 function Hero() {
@@ -25,6 +27,16 @@ function Hero() {
 
           <a className="hero-button-secondary" href="#contact">
             Entre em contato
+          </a>
+
+          <a
+            className="hero-button-secondary"
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FileText size={16} aria-hidden="true" />
+            Currículo (PDF)
           </a>
         </div>
       </div>

@@ -75,6 +75,7 @@
 }
 
 .hero-button-secondary {
+  gap: 8px;
   color: var(--color-text);
 }
 
