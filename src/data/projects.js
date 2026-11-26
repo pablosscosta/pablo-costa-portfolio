@@ -1,40 +1,27 @@
-
 const projects = [
   {
-    id: 1,
-    title: 'Projeto em destaque',
+    id: 'jukebox-hub',
+    title: 'Jukebox Hub',
     description:
-      'Descrição temporária de uma aplicação desenvolvida para resolver um problema específico.',
-    technologies: ['Ruby on Rails', 'PostgreSQL', 'Docker'],
+      'Jukebox colaborativa integrada ao Spotify: o host toca a música no próprio dispositivo e os convidados escolhem a próxima faixa pelo celular, sem precisar de conta. Fila justa entre os convidados e atualização ao vivo em todos os celulares.',
+    technologies: [
+      'Ruby on Rails 8.1',
+      'React 19',
+      'TypeScript',
+      'PostgreSQL',
+      'SSE',
+      'Spotify API',
+    ],
     category: 'FULL STACK',
     featured: true,
-    image: null,
-    github: null,
-    demo: null,
-  },
-  {
-    id: 2,
-    title: 'Projeto secundário',
-    description:
-      'Descrição temporária de outro projeto de desenvolvimento.',
-    technologies: ['Python', 'Django', 'React'],
-    category: 'FULL STACK',
-    featured: false,
-    image: null,
-    github: null,
-    demo: null,
-  },
-  {
-    id: 3,
-    title: 'Outro projeto',
-    description:
-      'Descrição temporária de uma aplicação ou ferramenta desenvolvida.',
-    technologies: ['Python', 'JavaScript'],
-    category: 'DESENVOLVIMENTO',
-    featured: false,
-    image: null,
-    github: null,
-    demo: null,
+    image: {
+      src: '/projects/jukebox-hub.png',
+      alt: 'Tela do host no Jukebox Hub: música tocando com capa e progresso, busca e próximas músicas da fila',
+    },
+    github: 'https://github.com/pablosscosta/jukebox-hub',
+    demo: 'https://jukebox-hub-web.onrender.com',
+    demoNote:
+      'Hospedado no plano gratuito do Render: o primeiro acesso pode levar até 1 minuto.',
   },
 ]
 
