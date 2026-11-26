@@ -26,6 +26,12 @@ function About() {
             participando da implementação de funcionalidades, manutenção e
             evolução de aplicações.
           </p>
+
+          <p>
+            Busco vagas de desenvolvedor backend ou full stack júnior. Prefiro
+            trabalho remoto, mas avalio oportunidades híbridas ou presenciais
+            quando fazem sentido. Moro em Santarém (PA), Amazônia.
+          </p>
         </div>
       </div>
     </section>
