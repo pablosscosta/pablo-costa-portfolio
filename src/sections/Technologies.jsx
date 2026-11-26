@@ -1,5 +1,4 @@
 
-import { FlaskConical } from 'lucide-react'
 import {
   SiRuby,
   SiRubyonrails,
@@ -14,8 +13,6 @@ import {
   SiMysql,
   SiGit,
   SiDocker,
-  SiVitest,
-  SiGithubactions,
 } from 'react-icons/si'
 
 import './Technologies.css'
@@ -52,14 +49,6 @@ const technologyGroups = [
     technologies: [
       { name: 'Git', icon: SiGit },
       { name: 'Docker', icon: SiDocker },
-    ],
-  },
-  {
-    name: 'Qualidade',
-    technologies: [
-      { name: 'RSpec', icon: FlaskConical },
-      { name: 'Vitest', icon: SiVitest },
-      { name: 'GitHub Actions', icon: SiGithubactions },
     ],
   },
 ]
