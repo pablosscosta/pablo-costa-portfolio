@@ -1,6 +1,5 @@
 import { useState } from 'react'
-
-const FORM_NAME = 'contact'
+import profile from '../data/profile'
 
 const STATUS_MESSAGES = {
   success: 'Mensagem enviada! Respondo assim que possível.',
@@ -8,16 +7,13 @@ const STATUS_MESSAGES = {
     'Não foi possível enviar agora. Tente de novo ou fale comigo pelo LinkedIn.',
 }
 
-// Netlify Forms reads the submission from a urlencoded POST whose
-// "form-name" matches the static form declared in index.html.
-async function submitToNetlify(formData) {
-  const body = new URLSearchParams(formData)
-  body.set('form-name', FORM_NAME)
-
-  const response = await fetch('/', {
+// Formspree accepts the FormData as-is and forwards each submission by email.
+// "Accept: application/json" makes it answer with JSON instead of redirecting.
+async function submitToFormspree(formData) {
+  const response = await fetch(profile.contactFormEndpoint, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: body.toString(),
+    headers: { Accept: 'application/json' },
+    body: formData,
   })
 
   if (!response.ok) {
@@ -35,7 +31,7 @@ function ContactForm() {
     setStatus('sending')
 
     try {
-      await submitToNetlify(new FormData(form))
+      await submitToFormspree(new FormData(form))
       form.reset()
       setStatus('success')
     } catch (error) {
@@ -47,14 +43,14 @@ function ContactForm() {
   return (
     <form
       className="contact-form"
-      name={FORM_NAME}
+      action={profile.contactFormEndpoint}
       method="POST"
       onSubmit={handleSubmit}
     >
       <p className="contact-form-honeypot" aria-hidden="true">
         <label>
           Não preencha este campo
-          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+          <input name="_gotcha" tabIndex={-1} autoComplete="off" />
         </label>
       </p>
 
