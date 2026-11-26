@@ -3,17 +3,6 @@ import { FaGithub } from 'react-icons/fa'
 import projects from '../data/projects'
 import './Projects.css'
 
-const MIN_SECONDARY_SLOTS = 2
-const GRID_COLUMNS = 2
-
-function countComingSoonSlots(secondaryCount) {
-  if (secondaryCount < MIN_SECONDARY_SLOTS) {
-    return MIN_SECONDARY_SLOTS - secondaryCount
-  }
-
-  return (GRID_COLUMNS - (secondaryCount % GRID_COLUMNS)) % GRID_COLUMNS
-}
-
 function ProjectImage({ image, className }) {
   return (
     <div className={className}>
@@ -98,29 +87,18 @@ function ProjectCard({ project }) {
   )
 }
 
-function ComingSoonCard() {
+function ComingSoonNotice() {
   return (
-    <article className="project-card project-card--coming-soon">
-      <div className="project-card-image">
-        <span>Em breve</span>
-      </div>
-
-      <div className="project-card-content">
-        <span className="project-category">EM BREVE</span>
-        <h3>Novo projeto em desenvolvimento</h3>
-        <p>
-          Um novo projeto está sendo construído e aparecerá aqui assim que
-          estiver pronto.
-        </p>
-      </div>
-    </article>
+    <p className="projects-coming-soon">
+      <span>EM BREVE</span>
+      Mais projetos em desenvolvimento.
+    </p>
   )
 }
 
 function Projects() {
   const featuredProject = projects.find((project) => project.featured)
   const otherProjects = projects.filter((project) => !project.featured)
-  const comingSoonCount = countComingSoonSlots(otherProjects.length)
 
   return (
     <section className="projects section-container" id="projects">
@@ -138,15 +116,15 @@ function Projects() {
 
       {featuredProject && <FeaturedProject project={featuredProject} />}
 
-      <div className="projects-grid">
-        {otherProjects.map((project) => (
-          <ProjectCard project={project} key={project.id} />
-        ))}
+      {otherProjects.length > 0 && (
+        <div className="projects-grid">
+          {otherProjects.map((project) => (
+            <ProjectCard project={project} key={project.id} />
+          ))}
+        </div>
+      )}
 
-        {Array.from({ length: comingSoonCount }, (_, index) => (
-          <ComingSoonCard key={`coming-soon-${index}`} />
-        ))}
-      </div>
+      <ComingSoonNotice />
     </section>
   )
 }
