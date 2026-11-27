@@ -142,7 +142,7 @@ function ComingSoonNotice() {
 }
 
 function Projects() {
-  const featuredProject = projects.find((project) => project.featured)
+  const featuredProjects = projects.filter((project) => project.featured)
   const otherProjects = projects.filter((project) => !project.featured)
 
   return (
@@ -159,7 +159,9 @@ function Projects() {
         </p>
       </div>
 
-      {featuredProject && <FeaturedProject project={featuredProject} />}
+      {featuredProjects.map((project) => (
+        <FeaturedProject project={project} key={project.id} />
+      ))}
 
       {otherProjects.length > 0 && (
         <div className="projects-grid">
