@@ -1,36 +1,18 @@
 import { ExternalLink } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa'
+import ProjectVideo from '../components/ProjectVideo'
 import projects from '../data/projects'
 import './Projects.css'
 
-function prefersReducedMotion() {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
-}
-
-function ProjectVideo({ video, className }) {
-  const autoPlay = !prefersReducedMotion()
-
-  return (
-    <figure className={`${className} project-video`}>
-      <video
-        src={video.src}
-        poster={video.poster}
-        autoPlay={autoPlay}
-        controls={!autoPlay}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-label={video.caption}
-      />
-      <figcaption>{video.caption}</figcaption>
-    </figure>
-  )
-}
-
 function ProjectMedia({ project, className }) {
   if (project.video) {
-    return <ProjectVideo video={project.video} className={className} />
+    return (
+      <ProjectVideo
+        video={project.video}
+        title={project.title}
+        className={className}
+      />
+    )
   }
 
   return (

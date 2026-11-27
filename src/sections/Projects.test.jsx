@@ -29,7 +29,9 @@ describe('Projects', () => {
       render(<Projects />)
 
       const card = within(getProjectCard(project.title))
-      expect(card.getByText(project.video.caption)).toBeVisible()
+      expect(
+        card.getByText(project.video.caption, { selector: 'figcaption' }),
+      ).toBeVisible()
     },
   )
 })
