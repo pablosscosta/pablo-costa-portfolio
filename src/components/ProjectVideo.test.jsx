@@ -1,6 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
+import { enterScreen, leaveScreen } from '../test/intersectionObserver'
 import ProjectVideo from './ProjectVideo'
 
 const video = {
@@ -22,6 +23,10 @@ function getPreview() {
   })
 }
 
+function getPreviewVideo() {
+  return getPreview().querySelector('video')
+}
+
 function preferReducedMotion() {
   vi.spyOn(window, 'matchMedia').mockImplementation((query) => ({
     matches: query === '(prefers-reduced-motion: reduce)',
@@ -31,18 +36,78 @@ function preferReducedMotion() {
   }))
 }
 
+// Lets a rejected play() reach the component's .catch() before the assertions.
+function settlePromises() {
+  return new Promise((resolve) => setTimeout(resolve, 0))
+}
+
 describe('ProjectVideo', () => {
-  it('plays a muted, looping preview with the caption', () => {
+  it('shows a muted, looping preview that waits to be on screen', () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
     renderVideo()
 
-    const preview = getPreview().querySelector('video')
-    expect(preview).toHaveAttribute('autoplay')
+    const preview = getPreviewVideo()
+    expect(preview).not.toHaveAttribute('autoplay')
+    expect(preview).toHaveAttribute('preload', 'none')
     expect(preview).toHaveAttribute('loop')
     expect(preview.muted).toBe(true)
+    expect(play).not.toHaveBeenCalled()
     expect(
       screen.getByText(video.caption, { selector: 'figcaption' }),
     ).toBeVisible()
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('plays the preview when it shows up on screen', () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
+    renderVideo()
+    const preview = getPreviewVideo()
+
+    enterScreen(preview)
+
+    expect(play).toHaveBeenCalledOnce()
+    expect(play.mock.contexts[0]).toBe(preview)
+  })
+
+  it('pauses the preview when it leaves the screen', () => {
+    const pause = vi.spyOn(HTMLMediaElement.prototype, 'pause')
+    renderVideo()
+    const preview = getPreviewVideo()
+    enterScreen(preview)
+
+    leaveScreen(preview)
+
+    expect(pause).toHaveBeenCalledOnce()
+    expect(pause.mock.contexts[0]).toBe(preview)
+  })
+
+  it('warns when the browser does not let the preview play', async () => {
+    const error = new DOMException('Blocked.', 'NotAllowedError')
+    vi.spyOn(HTMLMediaElement.prototype, 'play').mockRejectedValue(error)
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+    renderVideo()
+
+    enterScreen(getPreviewVideo())
+    await settlePromises()
+
+    expect(warn).toHaveBeenCalledWith(
+      'Could not start the demo preview.',
+      error,
+    )
+  })
+
+  it('does not warn when leaving the screen interrupts the preview', async () => {
+    const error = new DOMException('Interrupted.', 'AbortError')
+    vi.spyOn(HTMLMediaElement.prototype, 'play').mockRejectedValue(error)
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => undefined)
+    renderVideo()
+    const preview = getPreviewVideo()
+
+    enterScreen(preview)
+    leaveScreen(preview)
+    await settlePromises()
+
+    expect(warn).not.toHaveBeenCalled()
   })
 
   it('opens a large player with controls when the preview is clicked', async () => {
@@ -109,8 +174,7 @@ describe('ProjectVideo', () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, 'play')
     const user = renderVideo()
 
-    expect(getPreview().querySelector('video')).not.toHaveAttribute('autoplay')
-
+    enterScreen(getPreviewVideo())
     await user.click(getPreview())
 
     expect(screen.getByRole('dialog')).toBeInTheDocument()

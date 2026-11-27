@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/vitest'
 import { cleanup } from '@testing-library/react'
 import { afterEach, vi } from 'vitest'
+import { FakeIntersectionObserver } from './intersectionObserver'
 
 // jsdom has no matchMedia: by default the tests run as a visitor without a
 // reduced-motion preference. A test can spy on it to change that.
@@ -25,6 +26,10 @@ HTMLDialogElement.prototype.close = function close() {
 // jsdom does not play media either. Tests spy on these to check what happened.
 HTMLMediaElement.prototype.play = () => Promise.resolve()
 HTMLMediaElement.prototype.pause = () => undefined
+
+// No IntersectionObserver in jsdom either: tests use enterScreen/leaveScreen
+// from ./intersectionObserver to move an element on and off the screen.
+window.IntersectionObserver = FakeIntersectionObserver
 
 afterEach(() => {
   cleanup()

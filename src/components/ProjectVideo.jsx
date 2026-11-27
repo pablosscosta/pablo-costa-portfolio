@@ -1,18 +1,55 @@
 import { Maximize2, X } from 'lucide-react'
-import { useId, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import './ProjectVideo.css'
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+function playPreview(videoElement) {
+  videoElement.play().catch((error) => {
+    // Leaving the screen while the video still loads makes pause() interrupt
+    // play() with an AbortError: expected, so there is nothing to report.
+    if (error.name !== 'AbortError') {
+      console.warn('Could not start the demo preview.', error)
+    }
+  })
+}
+
+// With `autoplay`, the browser downloads every preview as soon as the page
+// opens, even off screen. Here the preview loads and plays only while it is on
+// screen, and pauses when it leaves: less data and less battery.
+function usePlayWhileOnScreen(videoRef, enabled) {
+  useEffect(() => {
+    if (!enabled || !('IntersectionObserver' in window)) {
+      return
+    }
+
+    const videoElement = videoRef.current
+    const observer = new IntersectionObserver((entries) => {
+      // Several changes can arrive together: the last one is the current state.
+      if (entries.at(-1).isIntersecting) {
+        playPreview(videoElement)
+      } else {
+        videoElement.pause()
+      }
+    })
+
+    observer.observe(videoElement)
+    return () => observer.disconnect()
+  }, [videoRef, enabled])
+}
+
 // The card shows a small looping preview. A click opens the same video in a
 // native <dialog>: large, with the browser controls (fullscreen included).
 function ProjectVideo({ video, title, className }) {
   const dialogRef = useRef(null)
+  const previewRef = useRef(null)
   const playerRef = useRef(null)
   const headingId = useId()
   const reducedMotion = prefersReducedMotion()
+
+  usePlayWhileOnScreen(previewRef, !reducedMotion)
 
   function openPlayer() {
     dialogRef.current.showModal()
@@ -45,13 +82,13 @@ function ProjectVideo({ video, title, className }) {
         aria-label={`Ampliar o vídeo de demonstração do ${title}`}
       >
         <video
+          ref={previewRef}
           src={video.src}
           poster={video.poster}
-          autoPlay={!reducedMotion}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-hidden="true"
         />
         <span className="project-video-expand" aria-hidden="true">
