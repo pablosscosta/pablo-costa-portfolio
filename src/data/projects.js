@@ -34,6 +34,34 @@ const projects = [
     demoNote:
       'Hospedado no plano gratuito do Render: o primeiro acesso pode levar até 1 minuto. Criar uma party exige uma conta do Spotify liberada na demo; convidados entram pelo link, sem conta.',
   },
+  {
+    id: 'whatsapp-link-generator',
+    title: 'WhatsApp Link Generator',
+    description:
+      'Gera um link e um QR code que abrem o WhatsApp com o número certo e uma mensagem pronta. Nasceu de um caso real: numa loja em que toda a equipe divide o mesmo WhatsApp, o cliente que vem pela divulgação de um atendente chega identificado.',
+    highlights: [
+      'Validação do número brasileiro (DDD, celular e fixo) e montagem do link em funções puras, com testes unitários.',
+      'QR code em PNG e SVG, copiar o link e compartilhar direto do celular pela Web Share API.',
+      'Começa sem backend de propósito: o Django só entra quando precisar contar cliques, decisão registrada em ADR.',
+    ],
+    technologies: [
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'Web Share API',
+      'GitHub Pages',
+    ],
+    category: 'FRONT END',
+    featured: true,
+    video: {
+      src: '/projects/whatsapp-link-generator-demo.mp4',
+      poster: '/projects/whatsapp-link-generator-demo.jpg',
+      caption:
+        'Demonstração com dados fictícios: o mesmo link gerado no computador e no celular.',
+    },
+    github: 'https://github.com/pablosscosta/whatsapp-link-generator',
+    demo: 'https://pablosscosta.github.io/whatsapp-link-generator/',
+  },
 ]
 
 export default projects
